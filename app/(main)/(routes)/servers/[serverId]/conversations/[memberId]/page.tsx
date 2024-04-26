@@ -52,12 +52,13 @@ const MemberIdPage = async ({
   const { memberOne, memberTwo } = conversation;
 
   const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne;
+  const [firstName, lastName] = otherMember.profile.name.split(' ');
 
   return ( 
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
       <ChatHeader
         imageUrl={otherMember.profile.imageUrl}
-        name={otherMember.profile.name}
+        name={firstName ? firstName : lastName}
         serverId={params.serverId}
         type="conversation"
       />
@@ -72,7 +73,7 @@ const MemberIdPage = async ({
         <>
           <ChatMessages
             member={currentMember}
-            name={otherMember.profile.name}
+            name={firstName ? firstName : lastName}
             chatId={conversation.id}
             type="conversation"
             apiUrl="/api/direct-messages"
@@ -84,7 +85,7 @@ const MemberIdPage = async ({
             }}
           />
           <ChatInput
-            name={otherMember.profile.name}
+            name={firstName ? firstName : lastName}
             type="conversation"
             apiUrl="/api/socket/direct-messages"
             query={{

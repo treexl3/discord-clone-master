@@ -31,6 +31,8 @@ export const ServerMember = ({
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`)
   }
 
+  const [firstName, lastName] = member.profile.name.split(' ');
+  
   return (
     <button
       onClick={onClick}
@@ -43,14 +45,26 @@ export const ServerMember = ({
         src={member.profile.imageUrl}
         className="h-8 w-8 md:h-8 md:w-8"
       />
-      <p
-        className={cn(
-          "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
-          params?.memberId === member.id && "text-primary dark:text-zinc-200 dark:group-hover:text-white"
+      {firstName && (
+          <p
+            className={cn(
+              "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
+              params?.memberId === member.id && "text-primary dark:text-zinc-200 dark:group-hover:text-white"
+            )}
+          >
+            {firstName}
+          </p>
         )}
-      >
-        {member.profile.name}
-      </p>
+        {lastName && lastName !== "null" && (
+          <p
+            className={cn(
+              "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
+              params?.memberId === member.id && "text-primary dark:text-zinc-200 dark:group-hover:text-white"
+            )}
+          >
+            {lastName}
+          </p>
+        )}
       {icon}
     </button>
   )

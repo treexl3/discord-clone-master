@@ -74,6 +74,8 @@ export const ChatItem = ({
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
   }
 
+  const [firstName, lastName] = member.profile.name.split(' ');
+
   useEffect(() => {
     const handleKeyDown = (event: any) => {
       if (event.key === "Escape" || event.keyCode === 27) {
@@ -136,9 +138,16 @@ export const ChatItem = ({
         <div className="flex flex-col w-full">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
-              <p onClick={onMemberClick} className="font-semibold text-sm hover:underline cursor-pointer">
-                {member.profile.name}
-              </p>
+              {firstName && (
+                <p onClick={onMemberClick} className="font-semibold text-sm hover:underline cursor-pointer">
+                  {firstName}
+                </p>
+              )}
+              {lastName && lastName !== "null" && (
+                <p onClick={onMemberClick} className="font-semibold text-sm hover:underline cursor-pointer">
+                  {lastName}
+                </p>
+              )}
               <ActionTooltip label={member.role}>
                 {roleIconMap[member.role]}
               </ActionTooltip>

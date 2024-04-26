@@ -114,7 +114,15 @@ export const MembersModal = () => {
               <UserAvatar src={member.profile.imageUrl} />
               <div className="flex flex-col gap-y-1">
                 <div className="text-xs font-semibold flex items-center gap-x-1">
-                  {member.profile.name}
+                  {member.profile.name.includes(' ') ? (
+                    <p className="text-xs text-zinc-500">
+                      {member.profile.name.split(' ')[0]}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-zinc-500">
+                      {member.profile.name}
+                    </p>
+                  )}
                   {roleIconMap[member.role]}
                 </div>
                 <p className="text-xs text-zinc-500">

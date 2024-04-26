@@ -19,11 +19,11 @@ export const MediaRoom = ({
 }: MediaRoomProps) => {
   const { user } = useUser();
   const [token, setToken] = useState("");
-  
+
   useEffect(() => {
     if (!user?.firstName || !user?.lastName) return;
     
-    const name = `${user.firstName} ${user.lastName}`;
+    const name = `${user.firstName}`;
     
     (async () => {
       try {
@@ -35,7 +35,7 @@ export const MediaRoom = ({
       }
     })()
   }, [user?.firstName, user?.lastName, chatId]);
-  console.log(user)
+  console.log(chatId)
   if (token === "") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
